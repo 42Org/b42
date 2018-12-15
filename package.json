@@ -1,0 +1,27 @@
+{
+  "name": "shadow-electorn-starter",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app/main.js",
+  "scripts": {
+    "b42": "./vendor/Brave.app/Contents/MacOS/Brave ./app/main.js",
+    "dev": "./node_modules/.bin/shadow-cljs watch main renderer",
+    "build": "./node_modules/.bin/shadow-cljs compile main renderer",
+    "release": "./node_modules/.bin/shadow-cljs release main renderer",
+    "clean": "rm -rf resources/public/js/* && rm -rf target"
+  },
+  "keywords": [],
+  "author": "Ahonn Jiang <ahonn95@outlook.com>",
+  "license": "ISC",
+  "devDependencies": {
+    "source-map-support": "^0.4.18",
+    "ws": "^3.2.0"
+  },
+  "dependencies": {
+    "create-react-class": "^15.6.2",
+    "electron": "^1.7.10",
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0",
+    "shadow-cljs": "^2.2.16"
+  }
+}
