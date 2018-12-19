@@ -6,11 +6,11 @@ Keyboard Driven browser, Inspired by Pentadactyl.
 ## How to Run
 ```
 npm install
+npm run build
 npm start
 ```
 
 ## Release
 ```
-npm run build
 electron-packager . HelloWorld --platform=darwin --arch=x64 --version=1.4.13
 ```
