@@ -7,7 +7,6 @@ Keyboard Driven browser, Inspired by Pentadactyl.
 ```
 npm install
 npm start
-npm run b42
 ```
 
 ## Release
