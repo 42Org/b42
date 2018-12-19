@@ -58,7 +58,10 @@
 (defn start! []
   (reagent/render
     [root-component]
-    (js/document.getElementById "app-container")))
+    (let [app-container (js/document.createElement "app-container")]
+      (.appendChild js/document.body app-container)
+      (js/document.getElementById "app-container")
+      )))
 
 (start!)
 

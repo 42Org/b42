@@ -1,27 +1,28 @@
 {
-  "name": "shadow-electorn-starter",
-  "version": "1.0.0",
-  "description": "",
+  "name": "B42",
+  "version": "0.0.01",
+  "description": "Pentadactyl inspired browser based Brave/muon and clojurescript.",
   "main": "app/main.js",
   "scripts": {
     "b42": "./vendor/Brave.app/Contents/MacOS/Brave ./app/main.js",
-    "dev": "./node_modules/.bin/shadow-cljs watch main renderer",
-    "build": "./node_modules/.bin/shadow-cljs compile main renderer",
-    "release": "./node_modules/.bin/shadow-cljs release main renderer",
-    "clean": "rm -rf resources/public/js/* && rm -rf target"
+    "start": "node ./node_modules/muon-download/main.js",
+    "dev": "echo \"Add Some Watcher here.\"",
+    "build": "lumo build.cljs"",
+    "release": "echo \"Some Release Mechanism\"",
+    "clean": "rm -rf app/*"
   },
   "keywords": [],
-  "author": "Ahonn Jiang <ahonn95@outlook.com>",
-  "license": "ISC",
+  "author": "Pankaj Doharey <pankajdoharey@gmail.com>",
+  "license": "WTFPL",
   "devDependencies": {
     "source-map-support": "^0.4.18",
-    "ws": "^3.2.0"
+    "ws": "^3.2.0",
+    "muon-download": "42Org/muon-download"
   },
   "dependencies": {
     "create-react-class": "^15.6.2",
-    "electron": "^1.7.10",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
-    "shadow-cljs": "^2.2.16"
+    "lumo-cljs": "^2.2.16"
   }
 }
