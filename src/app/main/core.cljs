@@ -1,19 +1,19 @@
-(ns app.main.core
-  (:require ["electron" :as electron :refer [app BrowserWindow]]))
+(ns app.main.core)
 
-(def main-window (atom nil))
+(enable-console-print!)
+
 (def electron (js/require "electron"))
+(def main-window (atom nil))
+(def app (aget electron "app"))
 
 (defn init-browser []
-  (def screen (.getPrimaryDisplay electron.screen))
-  (reset! main-window (BrowserWindow. screen.size))
-
-  
-  ; Path is relative to the compiled js file (main.js in our case)
-  ;; (.loadURL @main-window (str "file://" js/__dirname "/public/index.html"))
-  (.on @main-window "closed" #(reset! main-window nil)))
+  (let [screen (.getPrimaryDisplay electron.screen)]
+    (reset! main-window (electron.BrowserWindow. screen.size))
+    (.loadURL @main-window (str "file://" js/__dirname "/core.js"))
+    (.on @main-window "closed" #(reset! main-window nil))))
 
 (defn main []
-  (.on app "window-all-closed" #(when-not (= js/process.platform "darwin")
-                                  (.quit app)))
-  (.on app "ready" init-browser))
+  (.on app "ready" init-browser)
+  (.log js/console electron))
+
+(main)

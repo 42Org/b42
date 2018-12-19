@@ -6,10 +6,10 @@
   "scripts": {
     "start": "./vendor/Brave.app/Contents/MacOS/Brave ./app/main.js",
     "dev": "echo \"Add Some Watcher here.\"",
-    "build": "lumo build.cljs",
+    "build": "lumo -c src build.cljs",
     "release": "echo \"Some Release Mechanism\"",
     "postinstall": "node ./node_modules/muon-download/main.js",
-    "clean": "rm -rf app/*"
+    "clean": "rm -rf app/* && rm -rf out/"
   },
   "keywords": [],
   "author": "Pankaj Doharey <pankajdoharey@gmail.com>",
@@ -21,8 +21,8 @@
   },
   "dependencies": {
     "create-react-class": "^15.6.2",
+    "lumo-cljs": "^1.9.0",
     "react": "^16.2.0",
-    "react-dom": "^16.2.0",
-    "lumo-cljs": "^1.9.0"
+    "react-dom": "^16.2.0"
   }
 }
