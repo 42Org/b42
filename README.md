@@ -5,11 +5,8 @@ Keyboard Driven browser, Inspired by Pentadactyl.
 
 ## How to Run
 ```
-npm install shadow-cljs -g
-shadow-cljs run tools.muon/fetch
 npm install
-
-npm run dev
+npm start
 npm run b42
 ```
 
