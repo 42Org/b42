@@ -4,11 +4,10 @@
   "description": "Pentadactyl inspired browser based Brave/muon and clojurescript.",
   "main": "app/main.js",
   "scripts": {
-    "start": "./vendor/Brave.app/Contents/MacOS/Brave ./app/main.js",
+    "start": "./node_modules/.bin/muon ./app/main.js",
     "dev": "echo \"Add Some Watcher here.\"",
     "build": "lumo -c src build.cljs",
-    "release": "echo \"Some Release Mechanism\"",
-    "postinstall": "node ./node_modules/muon-download/main.js",
+    "release": "lumo -c src build.cljs release",
     "clean": "rm -rf app/* && rm -rf out/"
   },
   "keywords": [],
