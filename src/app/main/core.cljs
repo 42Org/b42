@@ -13,8 +13,7 @@
     (.on @main-window "closed" #(reset! main-window nil))))
 
 (defn main []
-  (.log js/console "Starting b42")
-  (.on app "ready" init-browser)
-  (.log js/console electron))
+  (.log js/console "Starting B42")
+  (.on app "ready" init-browser))
 
 (main)

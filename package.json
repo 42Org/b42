@@ -14,9 +14,10 @@
   "author": "Pankaj Doharey <pankajdoharey@gmail.com>",
   "license": "WTFPL",
   "devDependencies": {
+    "electron-packager": "^13.0.1",
+    "muon-download": "42Org/muon-download",
     "source-map-support": "^0.4.18",
-    "ws": "^3.2.0",
-    "muon-download": "42Org/muon-download"
+    "ws": "^3.2.0"
   },
   "dependencies": {
     "create-react-class": "^15.6.2",
