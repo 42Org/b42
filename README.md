@@ -12,5 +12,6 @@ npm start
 
 ## Release
 ```
+npm run release
 electron-packager . HelloWorld --platform=darwin --arch=x64 --version=1.4.13
 ```
