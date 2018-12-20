@@ -9,10 +9,11 @@
 (defn init-browser []
   (let [screen (.getPrimaryDisplay electron.screen)]
     (reset! main-window (electron.BrowserWindow. screen.size))
-    (.loadURL @main-window (str "file://" js/__dirname "/core.js"))
+    (.loadURL @main-window (str "file://" js/__dirname "/index.html"))
     (.on @main-window "closed" #(reset! main-window nil))))
 
 (defn main []
+  (.log js/console "Starting b42")
   (.on app "ready" init-browser)
   (.log js/console electron))
 

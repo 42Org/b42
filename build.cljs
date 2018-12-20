@@ -26,7 +26,7 @@
 (defn -main []
   (let [args js/process.argv
         command (last args)]
-    (.log js/console "Command: " command)
+    (.log js/console "Exec script: " command)
     (case command
       "release" (release)
       (dev-build))))
