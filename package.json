@@ -4,14 +4,17 @@
   "description": "Pentadactyl inspired browser based Brave/muon and clojurescript.",
   "main": "app/main.js",
   "scripts": {
-    "start": "./node_modules/.bin/muon ./app/main.js",
+    "start": "./node_modules/.bin/muon .",
     "dev": "echo \"Add Some Watcher here.\"",
-    "build": "lumo -c src build.cljs",
-    "release": "lumo -c src build.cljs release",
-    "clean": "rm -rf app/* && rm -rf out/"
+    "build": "clj build.cljs",
+    "release": "clj build.cljs release",
+    "clean": "rm -rf app/* && rm -rf out/",
   },
   "keywords": [],
-  "author": "Pankaj Doharey <pankajdoharey@gmail.com>",
+  "author": [
+    "Pankaj Doharey <pankajdoharey@gmail.com>",
+    "Alex Johnson <github.com/notalex>"
+  ],
   "license": "WTFPL",
   "devDependencies": {
     "electron-packager": "^13.0.1",
@@ -21,7 +24,6 @@
   },
   "dependencies": {
     "create-react-class": "^15.6.2",
-    "lumo-cljs": "^1.9.0",
     "react": "^16.2.0",
     "react-dom": "^16.2.0"
   }
