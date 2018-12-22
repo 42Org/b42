@@ -1,4 +1,8 @@
-(ns app.main.core)
+(ns app.main.core
+  (:require [cljs.js :refer [empty-state eval js-eval]]
+            [cljs.tools.reader :refer [read-string]]
+            [cljs.env :refer [*compiler*]]
+            [cljs.pprint :refer [pprint]]))
 
 (enable-console-print!)
 
@@ -14,6 +18,10 @@
 
 (defn main []
   (.log js/console "Starting B42")
-  (.on app "ready" init-browser))
+  (.on app "ready" init-browser)
+  (eval (empty-state) (read-string "(+ 1 2 3)")
+        {:eval       js-eval
+         :source-map true
+         :context    :expr} #(pprint %1)))
 
 (main)
