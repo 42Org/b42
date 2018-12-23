@@ -6,7 +6,6 @@
   (b/inputs "src")
   {:main 'app.main.core
    :output-to "app/main.js"
-   :output-dir "out/"
    :optimizations :none
    :target :nodejs
    :infer-externs true})
@@ -17,7 +16,6 @@
    (b/inputs "src")
    {:main 'app.main.core
     :output-to "app/main.js"
-    :output-dir "out/"
     :optimizations :simple
     :target :nodejs
     :infer-externs true})
@@ -26,7 +24,7 @@
 (defn main [cli-arg]
   (let [args cli-arg
         command (last args)]
-    (println "Exec script: " command)
+    (println "Build Type: " command)
     (case command
       "release" (release)
       (dev-build))))
