@@ -4,11 +4,11 @@
   "description": "Pentadactyl inspired browser based Brave/muon and clojurescript.",
   "main": "app/main.js",
   "scripts": {
-    "start": "./node_modules/.bin/muon .",
-    "dev": "echo \"Add Some Watcher here.\"",
+    "start": "./node_modules/.bin/muon app/main.js",
+    "watch": "echo \"Add Some Watcher here.\"",
     "build": "clj build.cljs",
     "release": "clj build.cljs release",
-    "clean": "rm -rf app/* && rm -rf out/",
+    "clean": "rm -rf app/* && rm -rf out/"
   },
   "keywords": [],
   "author": [
@@ -18,13 +18,10 @@
   "license": "WTFPL",
   "devDependencies": {
     "electron-packager": "^13.0.1",
-    "muon-download": "github:42Org/muon-download",
     "source-map-support": "^0.4.18",
     "ws": "^3.2.0"
   },
   "dependencies": {
-    "create-react-class": "^15.6.2",
-    "react": "^16.2.0",
-    "react-dom": "^16.2.0"
+    "muon-download": "github:42Org/muon-download"
   }
 }

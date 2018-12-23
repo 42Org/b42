@@ -10,6 +10,13 @@
 (def main-window (atom nil))
 (def app (aget electron "app"))
 
+
+(defn eval-exp [exp]
+  (eval (empty-state) (read-string exp)
+        {:eval       js-eval
+         :source-map true
+         :context    :expr} #(%1)))
+
 (defn init-browser []
   (let [screen (.getPrimaryDisplay electron.screen)]
     (reset! main-window (electron.BrowserWindow. screen.size))
@@ -18,10 +25,7 @@
 
 (defn main []
   (.log js/console "Starting B42")
-  (.on app "ready" init-browser)
-  (eval (empty-state) (read-string "(+ 1 2 3)")
-        {:eval       js-eval
-         :source-map true
-         :context    :expr} #(pprint %1)))
+  (.log js/console electron)
+  (.on app "ready" init-browser))
 
 (main)
