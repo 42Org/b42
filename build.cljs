@@ -1,32 +1,35 @@
 (require '[cljs.build.api :as b])
 
+(defn build-renderer [opt]
+  (b/build
+   (b/inputs "src")
+   {:main 'app.renderer.core
+    :output-to "app/renderer.js"
+    :optimizations opt
+    :target :nodejs
+    :infer-externs true})
+  (println "renderer compiled." "Optimisations: " opt))
 
-(defn dev-build []
+(defn build-main [opt]
  (b/build
   (b/inputs "src")
   {:main 'app.main.core
    :output-to "app/main.js"
-   :optimizations :none
+   :optimizations opt
    :target :nodejs
    :infer-externs true})
-  (println "Dev Build compiled.."))
+  (println "main ns compiled." "Optimisations: " opt))
 
-(defn release []
-  (b/build
-   (b/inputs "src")
-   {:main 'app.main.core
-    :output-to "app/main.js"
-    :optimizations :simple
-    :target :nodejs
-    :infer-externs true})
-  (println "Release Build compiled"))
+(defn build [opt]
+  (build-main opt)
+  (build-renderer opt))
 
 (defn main [cli-arg]
   (let [args cli-arg
         command (last args)]
     (println "Build Type: " command)
     (case command
-      "release" (release)
-      (dev-build))))
+      "release" (build :simple)
+      (build :none))))
 
 (main *command-line-args*)

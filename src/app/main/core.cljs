@@ -18,8 +18,9 @@
          :context    :expr} #(%1)))
 
 (defn init-browser []
-  (let [screen (.getPrimaryDisplay electron.screen)]
-    (reset! main-window (electron.BrowserWindow. screen.size))
+  (let [screen (.getPrimaryDisplay electron.screen)
+        size screen.size]
+    (reset! main-window (electron.BrowserWindow. size))
     (.loadURL @main-window (str "file://" js/__dirname "/index.html"))
     (.on @main-window "closed" #(reset! main-window nil))))
 

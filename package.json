@@ -5,7 +5,8 @@
   "main": "app/main.js",
   "scripts": {
     "start": "./node_modules/.bin/muon app/main.js",
-    "watch": "echo \"Add Some Watcher here.\"",
+    "watch-main": "clj -m cljs.main -t node -O none -o app/main.js -w src -c app.main.core",
+    "watch-renderer": "clj -m cljs.main -t node -O none -o app/renderer.js -w src -c app.renderer.core",
     "build": "clj build.cljs",
     "release": "clj build.cljs release",
     "clean": "rm -rf app/* && rm -rf out/"
