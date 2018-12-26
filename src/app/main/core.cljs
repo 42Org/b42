@@ -6,10 +6,9 @@
 
 (enable-console-print!)
 
-(def electron (js/require "electron"))
+(defonce electron (js/require "electron"))
 (def main-window (atom nil))
-(def app (aget electron "app"))
-
+(defonce app electron.app)
 
 (defn eval-exp [exp]
   (eval (empty-state) (read-string exp)
