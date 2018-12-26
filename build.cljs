@@ -30,7 +30,7 @@
   (future (b/watch
            (b/inputs "src")
            {:main 'app.main.core
-            :target :node
+            :target :nodejs
             :verbose true
             :optimizations :simple
             :output-to "app/main.js"
@@ -38,11 +38,11 @@
   (b/watch
            (b/inputs "src")
            {:main 'app.renderer.core
-            :target :node
+            :target :browser
             :verbose true
             :optimizations :simple
             :output-to "app/renderer.js"
-            :output-dir "out"}))
+            :output-dir "out/"}))
 
 (defn main [cli-arg]
   (let [args cli-arg
