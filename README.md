@@ -12,6 +12,8 @@ npm start
 ## How to Build
 ```
 npm run build
+npm run watch
+npm run release
 ```
 
 ## Release
