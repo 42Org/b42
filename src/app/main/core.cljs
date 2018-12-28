@@ -31,4 +31,4 @@
   (.log js/console electron)
   (.on app "ready" init-browser))
 
-(main)
+;; (main)

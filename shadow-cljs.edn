@@ -1,0 +1,15 @@
+{:dependencies [[reagent "0.8.1"]]
+ :source-paths ["src"]
+ :deps true
+ :builds {:main {:target :node-script
+                 :output-to "app/main.js"
+                 :main app.main.core/main}
+          
+          :renderer {:target :browser
+                     :output-dir "app/"
+                     :asset-path "."
+                     
+                     :modules {:renderer {:entries [app.renderer.core]}}
+                     
+                     :devtools {:before-load app.renderer.core/stop
+                                :after-load app.renderer.core/start}}}}
