@@ -2,8 +2,10 @@
   (:require [reagent.core :as r]))
 
 (defn web-view []
-  [:webview {:src "http://github.com"
-             :style {:display :inline-flex :width 640 :height 480}}])
+  [:webview {:src "https://google.com/"
+             :style {:display :inline-flex
+                     :width (.-innerWidth js/window)
+                     :height (.-innerHeight js/window)}}])
 
-(.log js/console "Renderer process in the browser.")
-(r/render-component [web-view] (.-body js/document))
+(.log js/console "Please contribute to B42.")
+(r/render [web-view] (.-body js/document))

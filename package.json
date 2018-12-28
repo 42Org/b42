@@ -4,7 +4,7 @@
   "description": "Pentadactyl inspired browser based Brave/muon and clojurescript.",
   "main": "app/main.js",
   "scripts": {
-    "start": "./node_modules/.bin/muon app/main.js",
+    "start": "./node_modules/.bin/electron app/main.js",
     "watch": "cp app/index.html out/app/main/ && clj build.cljs watch",
     "build": "cp app/index.html out/app/main/ && clj build.cljs",
     "release": "clj build.cljs release",
@@ -22,6 +22,6 @@
     "ws": "^3.2.0"
   },
   "dependencies": {
-    "muon-download": "github:42Org/muon-download"
+    "electron": "^4.0.0"
   }
 }
