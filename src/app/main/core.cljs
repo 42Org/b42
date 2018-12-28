@@ -30,5 +30,3 @@
   (.log js/console "Starting B42")
   (.log js/console electron)
   (.on app "ready" init-browser))
-
-;; (main)

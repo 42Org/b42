@@ -5,9 +5,9 @@
   "main": "app/main.js",
   "scripts": {
     "start": "./node_modules/.bin/electron app/main.js",
-    "watch": "cp app/index.html out/app/main/ && clj build.cljs watch",
-    "build": "cp app/index.html out/app/main/ && clj build.cljs",
-    "release": "clj build.cljs release",
+    "watch": "node_modules/.bin/shadow-cljs watch main renderer",
+    "build": "node_modules/.bin/shadow-cljs compile main renderer",
+    "release": "node_modules/.bin/shadow-cljs release main renderer",
     "clean": "rm -rf out/"
   },
   "keywords": [],
