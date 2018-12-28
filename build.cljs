@@ -7,8 +7,7 @@
     :output-to "app/renderer.js"
     :output-dir "out/"
     :optimizations opt
-    :target :nodejs
-    :infer-externs true})
+    :target :browser})
   (println "renderer compiled." "Optimizations: " opt))
 
 (defn build-main [opt]
@@ -18,8 +17,7 @@
    :output-to "app/main.js"
    :output-dir "out/"
    :optimizations opt
-   :target :nodejs
-   :infer-externs true})
+   :target :nodejs})
   (println "main ns compiled." "Optimizations: " opt))
 
 (defn build [opt]
