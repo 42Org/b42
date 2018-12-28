@@ -6,10 +6,9 @@
 
 (enable-console-print!)
 
-(def electron (js/require "electron"))
+(defonce electron (js/require "electron"))
 (def main-window (atom nil))
-(def app (aget electron "app"))
-
+(defonce app electron.app)
 
 (defn eval-exp [exp]
   (eval (empty-state) (read-string exp)
@@ -17,9 +16,12 @@
          :source-map true
          :context    :expr} #(%1)))
 
+
 (defn init-browser []
   (let [screen (.getPrimaryDisplay electron.screen)
         size screen.size]
+
+    (.log js/console electron.screen)
     (reset! main-window (electron.BrowserWindow. size))
     (.loadURL @main-window (str "file://" js/__dirname "/index.html"))
     (.on @main-window "closed" #(reset! main-window nil))))

@@ -4,3 +4,5 @@ vendor/
 package-lock.json
 out/
 .cpcache
+app/main.js
+app/renderer.js
