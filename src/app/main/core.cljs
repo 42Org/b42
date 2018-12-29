@@ -1,8 +1,5 @@
 (ns app.main.core
-  (:require [cljs.js :refer [empty-state eval js-eval]]
-            [cljs.tools.reader :refer [read-string]]
-            [cljs.env :refer [*compiler*]]
-            [cljs.pprint :refer [pprint]]))
+  (:require [cljs.pprint :refer [pprint]]))
 
 (enable-console-print!)
 
@@ -10,20 +7,15 @@
 (def main-window (atom nil))
 (defonce app electron.app)
 
-(defn eval-exp [exp]
-  (eval (empty-state) (read-string exp)
-        {:eval       js-eval
-         :source-map true
-         :context    :expr} #(%1)))
-
-
 (defn init-browser []
   (let [screen (.getPrimaryDisplay electron.screen)
-        size screen.size]
+        size screen.size
+        web-pref #js{:webPreferences #js{:nodeIntegration true}
+                     :width size.width :height size.height}]
 
     (.log js/console electron.screen)
-    (reset! main-window (electron.BrowserWindow. size))
-    (.loadURL @main-window (str "file://" js/__dirname "/index.html"))
+    (reset! main-window (electron.BrowserWindow. web-pref))
+    (.loadURL @main-window "http://localhost:3742")
     (.on @main-window "closed" #(reset! main-window nil))))
 
 (defn main []

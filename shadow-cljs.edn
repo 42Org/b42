@@ -1,15 +1,21 @@
-{:dependencies [[reagent "0.8.1"]]
+{:dependencies [[reagent "0.8.1"]
+                [replumb/replumb "0.2.1"]]
  :source-paths ["src"]
  :deps true
  :builds {:main {:target :node-script
                  :output-to "app/main.js"
                  :main app.main.core/main}
           
+          :bootstrap {:target :bootstrap
+                      :output-dir "app/bootstrap/"
+                      :entries [app.renderer.user cljs.js cljs.core]
+                      :exclude #{cljs.js}}
+
           :renderer {:target :browser
                      :output-dir "app/"
                      :asset-path "."
-                     
                      :modules {:renderer {:entries [app.renderer.core]}}
-                     
-                     :devtools {:before-load app.renderer.core/stop
+                     :devtools {:http-root "app/"
+                                :http-port 3742
+                                :before-load app.renderer.core/stop
                                 :after-load app.renderer.core/start}}}}
