@@ -1,24 +1,34 @@
 (ns app.main.core
-  (:require [cljs.pprint :refer [pprint]]))
+  (:require [electron :as electron]
+            [app.main.cli :as cli]))
 
 (enable-console-print!)
 
-(defonce electron (js/require "electron"))
 (def main-window (atom nil))
-(defonce app electron.app)
+(defonce app electron/app)
+(defonce argv (subvec (js->clj js/process.argv) 2))
+(defonce ipc-main electron/ipcMain)
 
-(defn init-browser []
-  (let [screen (.getPrimaryDisplay electron.screen)
-        size screen.size
-        web-pref #js{:webPreferences #js{:nodeIntegration true}
+(defn init-browser [size]
+  (cli/start-msg)
+  (let [web-pref #js{:webPreferences #js{:nodeIntegration true}
                      :width size.width :height size.height}]
 
-    (.log js/console electron.screen)
-    (reset! main-window (electron.BrowserWindow. web-pref))
+    (reset! main-window (new electron/BrowserWindow web-pref))
     (.loadURL @main-window "http://localhost:3742")
+    ;;Use doto foe .on invocation on main window
     (.on @main-window "closed" #(reset! main-window nil))))
 
+(defn start-default-window []
+  (let[screen (.getPrimaryDisplay electron/screen)
+       size screen.size]
+    (init-browser size)))
+
+(defn start []
+  (cond
+    (empty? argv) (start-default-window)
+    :else (cli/parse-args argv)))
+
 (defn main []
-  (.log js/console "Starting B42")
-  (.log js/console electron)
-  (.on app "ready" init-browser))
+  ;; (.log js/console electron)
+  (.on app "ready" start))
