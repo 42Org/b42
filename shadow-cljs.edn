@@ -8,7 +8,7 @@
           
           :bootstrap {:target :bootstrap
                       :output-dir "app/bootstrap/"
-                      :entries [app.renderer.user cljs.js cljs.core]
+                      :entries [cljs.js cljs.core]
                       :exclude #{cljs.js}}
 
           :renderer {:target :browser

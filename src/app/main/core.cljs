@@ -1,6 +1,7 @@
 (ns app.main.core
   (:require [electron :as electron]
-            [app.main.cli :as cli]))
+            [app.main.cli :as cli]
+            [app.main.io :as io]))
 
 (enable-console-print!)
 
@@ -11,12 +12,11 @@
 
 (defn init-browser [size]
   (cli/start-msg)
-  (let [web-pref #js{:webPreferences #js{:nodeIntegration true}
+  (let [web-pref #js{:title "B42" :webPreferences #js{:nodeIntegration true}
                      :width size.width :height size.height}]
 
     (reset! main-window (new electron/BrowserWindow web-pref))
     (.loadURL @main-window "http://localhost:3742")
-    ;;Use doto foe .on invocation on main window
     (.on @main-window "closed" #(reset! main-window nil))))
 
 (defn start-default-window []
@@ -30,5 +30,5 @@
     :else (cli/parse-args argv)))
 
 (defn main []
-  ;; (.log js/console electron)
-  (.on app "ready" start))
+  (.on app "ready" start)
+  (.on ipc-main "load-file" (fn[event path] (io/read-file event path))))
