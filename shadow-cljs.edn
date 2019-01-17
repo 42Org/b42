@@ -4,6 +4,7 @@
  :deps true
  :builds {:main {:target :node-script
                  :output-to "app/main.js"
+                 :optimizations :simple
                  :main app.main.core/main}
           
           :bootstrap {:target :bootstrap
@@ -14,6 +15,7 @@
           :renderer {:target :browser
                      :output-dir "app/"
                      :asset-path "."
+                     :optimizations :advanced
                      :modules {:renderer {:entries [app.renderer.core]}}
                      :devtools {:http-root "app/"
                                 :http-port 3742

@@ -12,10 +12,11 @@
 
 (defn init-browser [size]
   (cli/start-msg)
-  (let [web-pref #js{:title "B42" :webPreferences #js{:nodeIntegration true}
-                     :width size.width :height size.height}]
+  (let [web-pref (merge
+                  (js->clj size)
+                  {:title "B42" :webPreferences {:nodeIntegration true}})]
 
-    (reset! main-window (new electron/BrowserWindow web-pref))
+    (reset! main-window (new electron/BrowserWindow (clj->js web-pref)))
     (.loadURL @main-window "http://localhost:3742")
     (.on @main-window "closed" #(reset! main-window nil))))
 

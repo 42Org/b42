@@ -3,7 +3,8 @@
             [cljs.pprint :refer [pprint]]
             [app.renderer.bootstrap :as bootstrap]
             [app.renderer.init :as init]
-            [app.renderer.ui :as ui]))
+            [app.renderer.ui :as ui]
+            [app.renderer.keyboard :as kb]))
 
 (enable-console-print!)
 
