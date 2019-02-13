@@ -1,33 +1,24 @@
 (ns app.renderer.bootstrap
-  (:require [cljs.tools.reader :refer [read-string]]
-            [cljs.js :refer [empty-state eval eval-str js-eval]]
-            [shadow.cljs.bootstrap.browser :as boot]
-            [app.renderer.init :as init]))
+  (:require [cljs.env :as env]
+            [app.common.bootstrap :as boot]
+            [app.renderer.init :as init]
+            [shadow.cljs.bootstrap.browser :as browser]))
 
-(def default-env (empty-state))
+;;Bootstrapping code for renderer process.
+
+(defonce default-env (env/default-compiler-env))
 
 (defn eval-form [exp]
-  (eval-str default-env
-            (str exp)
-            "[B42]"
-            {:eval       js-eval
-             :source-map true
-             :verbose false
-             :load (partial boot/load default-env)}
-            identity))
+  (boot/eval-form default-env exp browser/load))
 
 (defn eval-string [exp]
-  (eval default-env
-        (read-string exp)
-        {:eval       js-eval
-         :source-map true
-         :verbose false
-         :load (partial boot/load default-env)}
-        identity))
+  (boot/eval-string default-env exp browser/load))
 
-(defn init []
-  (boot/init default-env {:path "/bootstrap"}
+(defn init[]
+  (boot/init browser/init default-env "/bootstrap"
              (fn[]
                ;;Load browser UI init scripts from this point.
                (eval-form init/load-msg)
                (eval-form (:data (init/load-init-scripts))))))
+
+;;Bootstrapping code ends here.
