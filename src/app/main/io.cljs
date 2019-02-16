@@ -1,7 +1,6 @@
 (ns app.main.io
   (:require [fs :as fs]
-            [path :as file-path]
-            [clojure.core.async :as async])
+            [path :as file-path])
   (:refer-clojure :exclude [load-file]))
 
 (defn path-finder [path cb]

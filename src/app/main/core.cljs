@@ -23,14 +23,19 @@
   ([] (load-global-config "~/.b42/init.cljs"))
   ([config-file] (io/load-file config-file)))
 
+(defn init-browser-view []
+  (let [web-pref #js{:title "B42" :webPreferences {:nodeIntegration true}}]
+    (new electron/BrowserView web-pref)))
+
 (defn init-browser [size]
   (cli/start-msg)
-  (let [web-pref (merge
-                  (js->clj size)
-                  {:title "B42" :webPreferences {:nodeIntegration true}})]
-
+  (let [web-pref size view (init-browser-view)]
     (reset! main-window (new electron/BrowserWindow (clj->js web-pref)))
     (.loadURL @main-window "http://localhost:3742")
+
+    (.setBrowserView @main-window view)
+    (.setBounds view #js{:x 0 :y 0 :width size.width :height size.height})
+    (.loadURL view.webContents "https://google.com")
 
     ;;call to initialize botstrapping compiler.
     (bootstrap/boot-init
