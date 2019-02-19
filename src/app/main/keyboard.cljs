@@ -8,3 +8,6 @@
   (.register gsh key-combo action))
 
 (defn register-key-bindings [config])
+
+(defn unbind-all []
+  (.unregisterAll gsh))

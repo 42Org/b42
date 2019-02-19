@@ -20,11 +20,18 @@
 
 ;;Load config from some ~/.b42/init.cljs
 (defn load-global-config
-  ([] (load-global-config "~/.b42/init.cljs"))
+  ([] (load-global-config "~/.b42/b42/init.cljs"))
   ([config-file] (io/load-file config-file)))
 
+(defn load-config []
+  ;;call to initialize bootstrapping compiler.
+    (bootstrap/boot-init
+     (str '(println "CLJS bootstrapped ..."))
+     (load-global-config)))
+
 (defn init-browser-view []
-  (let [web-pref #js{:title "B42" :webPreferences {:nodeIntegration true}}]
+  (let [web-pref #js{:title "B42" :webPreferences {:nodeIntegration true}
+                     :icon "./icon.png"}]
     (new electron/BrowserView web-pref)))
 
 (defn init-browser [size]
@@ -34,18 +41,13 @@
     (.loadURL @main-window "http://localhost:3742")
 
     (.setBrowserView @main-window view)
-    (.setBounds view #js{:x 0 :y 0 :width size.width :height size.height})
+    (.setBounds view #js{:x 0 :y 0 :width size.width :height (- size.height 70)})
     (.loadURL view.webContents "https://google.com")
 
-    ;;call to initialize botstrapping compiler.
-    (bootstrap/boot-init
-     "(println \"CLJS bootstrapped ...\")"
-     ;;Load b42 init scripts at this point.
-     (load-global-config)
-     "(test-config)")
+    (load-config)
+    ;;Reload config with shortcut
 
     (kb/register-key-bindings (get-key-bindings))
-    (kb/bind-key "Ctrl+A" (fn[] (println "HI")))
     (.on @main-window "closed" #(reset! main-window nil))))
 
 (defn start-default-window []

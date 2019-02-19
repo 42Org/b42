@@ -1,6 +1,5 @@
 {:dependencies [[reagent "0.8.1"]
-                [keybind "2.2.0"]
-                [tortue/spy "1.4.0"]]
+                [keybind "2.2.0"]]
  :source-paths ["src"]
  :builds {:main {:target :node-script
                  :output-to "app/main.js"
@@ -15,7 +14,7 @@
           :renderer {:target :browser
                      :output-dir "app/"
                      :asset-path "."
-                     :optimizations :advanced
+                     :optimizations :simple
                      :modules {:renderer {:entries [app.renderer.core]}}
                      :devtools {:http-root "app/"
                                 :http-port 3742
