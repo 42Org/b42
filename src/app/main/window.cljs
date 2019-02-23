@@ -10,11 +10,11 @@
 (def web-pref {:title "B42" :webPreferences {:nodeIntegration true}
                :icon "./icon.png"})
 
-(defn add-tab [id]
-  (reset! tabs (conj @tabs id)))
+(defn add-tab [view]
+  (reset! tabs (conj @tabs view)))
 
-(defn set-current-tab [id]
-  (reset! current-tab id))
+(defn set-current-tab [view]
+  (reset! current-tab view))
 
 (defn set-browser-view [view]
   (.setBrowserView @main-window view))
@@ -31,14 +31,30 @@
        (.setBounds #js{:x x :y y :width width :height (- height 42)})
        (.webContents.loadURL url)))))
 
+(defn switch-view [view]
+  (and @current-tab (.destroy @current-tab))
+  (set-browser-view view))
+
+(defn create-tab [pref url]
+  (let [view (create-browser-view pref url)]
+    (switch-view view)
+    (add-tab view)
+    (set-current-tab view)))
+
+(defn tab-switch [index]
+  (let [view (@tabs index)]
+    (switch-view view)))
+
 (defn init-browser [size]
   (cli/start-msg)
   (let [web-pref (merge web-pref size)]
     (reset! main-window (new electron/BrowserWindow (clj->js web-pref)))
     (.loadURL @main-window "http://localhost:3742")
 
-    (let [view (create-browser-view web-pref "https://yahoo.com")]
-      (.log js/console view))
+    (create-tab web-pref "https://yahoo.com")
+    (create-tab web-pref "https://google.com")
+    (tab-switch 0)
+
     (config/load)
     ;;Reload config with shortcut
 
