@@ -15,6 +15,6 @@
 
 (defn load []
   ;;call to initialize bootstrapping compiler.
-    (bootstrap/boot-init
-     (str '(println "CLJS bootstrapped ..."))
-     (load-global-config)))
+  (bootstrap/boot-init
+   (str '(println "CLJS bootstrapped ..."))
+   (load-global-config)))

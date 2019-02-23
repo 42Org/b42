@@ -11,11 +11,11 @@
 (defn eval-string [exp]
   (boot/eval-string exp browser/load))
 
-(defn init[]
+(defn init [& code]
   (boot/init browser/init "/bootstrap"
              (fn[]
                ;;Load browser UI init scripts from this point.
-               (eval-form init/load-msg)
-               (eval-form (:data (init/load-init-scripts))))))
+               (eval-string init/load-msg)
+               (eval-string (:data (init/load-init-scripts))))))
 
 ;;Bootstrapping code ends here.

@@ -2,6 +2,10 @@
   "name": "B42",
   "version": "0.0.01",
   "description": "Pentadactyl inspired browser based Brave/muon and clojurescript.",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/42org/b42.git"
+  },
   "main": "app/main.js",
   "scripts": {
     "start": "./node_modules/.bin/electron app/main.js",
@@ -17,15 +21,15 @@
   ],
   "license": "WTFPL",
   "devDependencies": {
-    "electron-packager": "^13.0.1",
+    "electron-packager": "^13.1.0",
     "shadow-cljs": "^2.7.36",
     "source-map-support": "^0.4.18",
     "ws": "^3.2.0"
   },
   "dependencies": {
     "create-react-class": "^15.6.3",
-      "electron": "^4.0.5",
-      "react-dom": "^16.8.2",
-      "react": "^16.8.2"
+    "electron": "^4.0.5",
+    "react-dom": "^16.8.2",
+    "react": "^16.8.2"
   }
 }
