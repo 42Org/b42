@@ -32,7 +32,6 @@
        (.webContents.loadURL url)))))
 
 (defn switch-view [view]
-  (and @current-tab (.destroy @current-tab))
   (set-browser-view view))
 
 (defn create-tab [pref url]
@@ -52,8 +51,9 @@
     (.loadURL @main-window "http://localhost:3742")
 
     (create-tab web-pref "https://yahoo.com")
+    (create-tab web-pref "https://github.com")
     (create-tab web-pref "https://google.com")
-    (tab-switch 0)
+    (tab-switch 1)
 
     (config/load)
     ;;Reload config with shortcut
