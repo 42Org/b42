@@ -7,7 +7,7 @@
 
 (enable-console-print!)
 
-(defn mount-root [] 
+(defn mount-root []
   (r/render [ui/app-view] (.getElementById js/document "app")))
 
 (defn start []

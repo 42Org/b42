@@ -4,7 +4,6 @@
 
 ;;Bootstrapping code for main process.
 
-
 (defn eval-form [exp]
   (boot/eval-form exp boot-node/load))
 
@@ -19,9 +18,4 @@
              #(doseq [txt code]
                 (compile-string txt))))
 
-
 ;;Bootstrapping code ends here.
-
-
-
-

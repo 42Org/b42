@@ -4,11 +4,11 @@
 
 (def pkg-json (js->clj (js/require "../package.json")))
 (defonce b42-version (pkg-json "version"))
-(defn start-msg [] 
+(defn start-msg []
   (println (str "Starting B42 " b42-version)))
 
 (def cli-options
-  [["-v" "--version" "B42 Version" 
+  [["-v" "--version" "B42 Version"
     :id :version
     :default-desc b42-version]
    ["-h" "--help"]])
@@ -41,4 +41,3 @@
     (if exit-message
       (exit (if ok? 0 1) exit-message)
       "")))
-
