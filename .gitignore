@@ -1,7 +1,6 @@
 .shadow-cljs/
 node_modules/
 vendor/
-package-lock.json
 out/
 app/bootstrap/*
 .cljs_node_repl
