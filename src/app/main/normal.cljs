@@ -3,6 +3,7 @@
             [app.main.keyboard :as kb]))
 
 (defn set-keybindings []
+  (kb/bind-key "ctrl+p" viewport/prev-view)
   (kb/bind-key "ctrl+n" viewport/next-view))
 
 ;; FIXME: Debug code. Remove later.

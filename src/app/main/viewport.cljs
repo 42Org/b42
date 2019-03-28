@@ -11,6 +11,7 @@
   (reset! current view))
 
 (defn switch-view [view]
+  (set-current view)
   (electro/set-browser-view view))
 
 (defn create [pref url]
@@ -23,5 +24,21 @@
   (let [view (@views index)]
     (switch-view view)))
 
+(defn current-index [] (.indexOf @views @current))
+
+(defn calc-next-index []
+  (let [index (+ 1 (current-index))]
+    (if (< index (count @views)) index 0)))
+
 (defn next-view []
-  (go-to 2))
+  (go-to (calc-next-index)))
+
+(defn last-index []
+  (- (count @views) 1))
+
+(defn calc-prev-index []
+  (let [index (- (current-index) 1)]
+    (if (< index 0) (last-index) index)))
+
+(defn prev-view []
+  (go-to (calc-prev-index)))
