@@ -16,6 +16,6 @@
 (defn boot-init [& code]
   (boot/init boot-node/init "app/bootstrap"
              #(doseq [txt code]
-                (compile-string txt))))
+               (compile-string txt))))
 
 ;;Bootstrapping code ends here.

@@ -20,11 +20,11 @@
 (defn create-browser-view
   ([pref url] (create-browser-view pref url 0 0))
   ([pref url x y]
-   (let [view (new electron/BrowserView)
-         width (pref "width")
-         height (pref "height")]
+    (let [view (new electron/BrowserView)
+          width (pref "width")
+          height (pref "height")]
 
-     (doto view
-       (set-browser-view)
-       (.setBounds #js{:x x :y y :width width :height (- height 42)})
-       (.webContents.loadURL url)))))
+      (doto view
+        (set-browser-view)
+        (.setBounds #js{:x x :y y :width width :height (- height 70)})
+        (.webContents.loadURL url)))))
