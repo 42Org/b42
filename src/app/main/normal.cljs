@@ -1,9 +1,14 @@
 (ns app.main.normal
   (:require [app.main.viewport :as viewport]
+            [app.main.electro :as electro]
             [app.main.keyboard :as kb]))
+
+(defn web-inspector []
+  (.openDevTools (.-webContents @electro/main-window) #js{:mode "detach"}))
 
 (defn set-keybindings []
   (kb/bind-key "ctrl+p" viewport/prev-view)
+  (kb/bind-key "ctrl+shift+i" web-inspector)
   (kb/bind-key "ctrl+n" viewport/next-view))
 
 ;; FIXME: Debug code. Remove later.
