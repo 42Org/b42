@@ -1,6 +1,7 @@
 (ns app.main.window
   (:require [app.main.electro :as electro]
             [app.main.cli :as cli]
+            [app.main.menu :as menu]
             [app.main.config :as config]
             [app.main.normal :as normal]))
 
@@ -12,9 +13,8 @@
   (let [web-pref (merge web-pref size)]
     (electro/create-main-window web-pref)
     (electro/load-url-in-window "http://localhost:3742")
-
+    (menu/setup)
     (normal/create-test-tabs web-pref)
-    (normal/set-keybindings)
 
     (config/load)
     ;;Reload config with shortcut
