@@ -11,15 +11,15 @@
 (defn init-browser [size]
   (cli/start-msg)
   (let [web-pref (merge web-pref size)]
-    (electro/create-main-window web-pref)
-    (electro/load-url-in-window "http://localhost:3742")
+    (electro/create-browser-window web-pref)
+    (.loadURL @electro/browser-window "http://localhost:3742")
     (menu/build-and-append-keys)
     (normal/create-test-tabs web-pref)
 
     (config/load)
     ;;Reload config with shortcut
 
-    (electro/reset-main-window-on-close)))
+    (electro/reset-browser-window-on-close)))
 
 (defn start-default-window
   ([] (let[screen (electro/get-primary-display)

@@ -12,7 +12,7 @@
 
 (defn switch-view [view]
   (set-current view)
-  (electro/set-browser-view view))
+  (electro/set-browser-window-view view))
 
 (defn create [pref url]
   (let [view (electro/create-browser-view pref url)]

@@ -1,21 +1,19 @@
 (ns app.main.electro
   (:require [electron :as electron]))
 
-(def main-window (atom nil))
+(def browser-window (atom nil))
 
-(defn set-browser-view [view]
-  (.setBrowserView @main-window view))
-
-(defn load-url-in-window [url] (.loadURL @main-window url))
+(defn set-browser-window-view [view]
+  (.setBrowserView @browser-window view))
 
 (defn get-primary-display []
   (.getPrimaryDisplay electron/screen))
 
-(defn create-main-window [pref]
-  (reset! main-window (new electron/BrowserWindow (clj->js pref))))
+(defn create-browser-window [pref]
+  (reset! browser-window (new electron/BrowserWindow (clj->js pref))))
 
-(defn reset-main-window-on-close []
-  (.on @main-window "closed" #(reset! main-window nil)))
+(defn reset-browser-window-on-close []
+  (.on @browser-window "closed" #(reset! browser-window nil)))
 
 (defn load-url-in-view [view url]
   (.webContents.loadURL view url))
@@ -28,6 +26,6 @@
           height (pref "height")]
 
       (doto view
-        (set-browser-view)
+        (set-browser-window-view)
         (.setBounds #js{:x x :y y :width width :height (- height 70)})
         (load-url-in-view url)))))
