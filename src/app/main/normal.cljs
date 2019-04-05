@@ -12,3 +12,6 @@
   (viewport/create pref "https://github.com")
   (viewport/create pref "https://google.com")
   (viewport/go-to 1))
+
+(defn open-url [_ url]
+  (viewport/load-url-in-current url))

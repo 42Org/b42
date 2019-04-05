@@ -42,3 +42,6 @@
 
 (defn prev-view []
   (go-to (calc-prev-index)))
+
+(defn load-url-in-current [url]
+  (electro/load-url-in-view @current url))

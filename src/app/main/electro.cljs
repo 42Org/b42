@@ -17,6 +17,9 @@
 (defn reset-main-window-on-close []
   (.on @main-window "closed" #(reset! main-window nil)))
 
+(defn load-url-in-view [view url]
+  (.webContents.loadURL view url))
+
 (defn create-browser-view
   ([pref url] (create-browser-view pref url 0 0))
   ([pref url x y]
@@ -27,4 +30,4 @@
       (doto view
         (set-browser-view)
         (.setBounds #js{:x x :y y :width width :height (- height 70)})
-        (.webContents.loadURL url)))))
+        (load-url-in-view url)))))

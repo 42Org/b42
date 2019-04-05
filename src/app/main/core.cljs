@@ -18,4 +18,5 @@
 
 (defn main []
   (.on app "ready" start)
+  (.on ipc-main "minibuffer-exec" io/exec)
   (.on ipc-main "load-file" (fn[event path] (io/read-file event path))))
