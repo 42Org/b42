@@ -1,10 +1,10 @@
-(ns app.main.normal
+(ns app.main.tools
   (:require [app.main.viewport :as viewport]
-            [app.main.electro :as electro]
+            [app.main.browser :as browser]
             [app.main.keyboard :as kb]))
 
 (defn web-inspector []
-  (.openDevTools (.-webContents @electro/browser-window) #js{:mode "detach"}))
+  (.openDevTools (.-webContents browser/browser-window) #js{:mode "detach"}))
 
 ;; FIXME: Debug code. Remove later.
 (defn create-test-tabs [pref]

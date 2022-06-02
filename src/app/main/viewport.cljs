@@ -1,5 +1,5 @@
 (ns app.main.viewport
-  (:require [app.main.electro :as electro]))
+  (:require [app.main.browser :as browser]))
 
 (def views (atom []))
 (def current (atom nil))
@@ -12,10 +12,10 @@
 
 (defn switch-view [view]
   (set-current view)
-  (electro/set-browser-window-view view))
+  (browser/set-browser-window-view view))
 
 (defn create [pref url]
-  (let [view (electro/create-browser-view pref url)]
+  (let [view (browser/create-browser-view pref url)]
     (switch-view view)
     (add view)
     (set-current view)))
@@ -44,4 +44,4 @@
   (go-to (calc-prev-index)))
 
 (defn load-url-in-current [url]
-  (electro/load-url-in-view @current url))
+  (browser/load-url-in-view @current url))

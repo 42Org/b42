@@ -1,6 +1,6 @@
 (ns app.main.io
   (:require [fs :as fs]
-            [app.main.normal :as normal]
+            [app.main.tools :as tools]
             [path :as file-path])
   (:refer-clojure :exclude [load-file]))
 
@@ -44,5 +44,5 @@
   (let [command-list (re-matches #"^([^\s]+) (.+)$" command-string)
         command (second command-list)
         args (last command-list)]
-    (normal/open-url command args)))
+    (tools/open-url command args)))
   ;((resolve (quote (symbol "viewport" fn-name)))))
