@@ -4,7 +4,7 @@
             [app.main.keyboard :as kb]))
 
 (defn web-inspector []
-  (.openDevTools (.-webContents browser/browser-window) #js{:mode "detach"}))
+  (@browser/Window.webContents.openDevTools #js{:mode "detach"}))
 
 ;; FIXME: Debug code. Remove later.
 (defn create-test-tabs [pref]

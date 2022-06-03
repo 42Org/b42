@@ -3,8 +3,7 @@
             [app.main.cli :as cli]
             [app.main.menu :as menu]
             [app.main.config :as config]
-            [app.main.tools :as tools]
-            ))
+            [app.main.tools :as tools]))
 
 (def web-pref {:title "B42" :webPreferences {:nodeIntegration true}
                :icon "./icon.png"})
@@ -12,15 +11,15 @@
 (defn init-browser [size]
   (cli/start-msg)
   (let [web-pref (merge web-pref size)]
-    (browser/create-browser-window web-pref)
-    ;; (.loadURL browser/browser-window "http://localhost:3742")
-    (menu/build-and-append-keys)
-    (tools/create-test-tabs web-pref)
+    (browser/create-browser-window (clj->js web-pref))
+    (browser/load-url "http://localhost:3742")
+    ;; (menu/build-and-append-keys)
+    ;; (tools/create-test-tabs web-pref)
 
-    (config/load)
+    ;; (config/load)
     ;;Reload config with shortcut
 
-    (browser/reset-browser-window-on-close)
+    ;; (browser/reset-browser-window-on-close)
     ))
 
 (defn start-default-window

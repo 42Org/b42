@@ -1,22 +1,26 @@
 (ns app.main.browser
   (:require [electron :as electron]))
 
-(def browser-window (atom nil))
+(def BrowserWindow (.-BrowserWindow electron))
+(def ^:dynamic Window (atom nil))
 
 (defn set-browser-window-view [view]
-  (.setBrowserView @browser-window view))
+  (@Window.setBrowserView view))
 
 (defn get-primary-display []
   (.getPrimaryDisplay (.-screen electron)))
 
 (defn create-browser-window [pref]
-  (reset! @browser-window (electron/BrowserWindow. (clj->js pref))))
+  (reset! Window (BrowserWindow. (clj->js pref))))
 
 (defn reset-browser-window-on-close []
-  (.on browser-window "closed" #(reset! browser-window nil)))
+  (@Window.on "closed" #(reset! Window nil)))
 
 (defn load-url-in-view [view url]
-  (view.webContents.loadURL url))
+  (.loadURL view.webContents "http://yahoo.com"))
+
+(defn load-url [url]
+  (.loadURL @Window url))
 
 (defn create-browser-view
   ([pref url] (create-browser-view pref url 0 0))
@@ -24,9 +28,6 @@
     (let [view electron/BrowserView.
           width (pref "width")
           height (pref "height")]
-
-      (js/console.log view)
-
-      (set-browser-window-view view)
-      (view.setBounds #js{:x x :y y :width width :height (- height 70)})
-      (load-url-in-view view url))))
+        (set-browser-window-view view)
+        (view.setBounds #js{:x x :y y :width width :height (- height 90)})
+        (load-url-in-view view url))))
