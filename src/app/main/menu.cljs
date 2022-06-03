@@ -11,7 +11,7 @@
 (defn append-keybindings [menu]
   (doseq [key-n-defn keybindings/all] (append menu key-n-defn)))
 
-(defn setup []
+(defn build-and-append-keys []
   (let [menu (.buildFromTemplate electron/Menu (clj->js menu-template))]
     (append-keybindings menu)
     (.setApplicationMenu electron/Menu menu)))

@@ -1,5 +1,6 @@
 (ns app.main.io
   (:require [fs :as fs]
+            [app.main.tools :as tools]
             [path :as file-path])
   (:refer-clojure :exclude [load-file]))
 
@@ -36,3 +37,12 @@
 
 (defn load-file [path]
   (read-file-sync path))
+
+; FIXME: Make any function executable through the minibuffer.
+; Currently, this only supports opening an url given to any function.
+(defn exec [_ command-string]
+  (let [command-list (re-matches #"^([^\s]+) (.+)$" command-string)
+        command (second command-list)
+        args (last command-list)]
+    (tools/open-url command args)))
+  ;((resolve (quote (symbol "viewport" fn-name)))))
