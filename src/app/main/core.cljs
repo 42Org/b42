@@ -18,8 +18,8 @@
     :else (cli/parse-args argv)))
 
 (defn main []
-  (.on app "ready" start)
   (.on app "window-all-closed" #(when-not darwin? (.quit app)))
   (.on app "activate" #(when darwin? (start)))
   (.on ipc-main "minibuffer-exec" io/exec)
-  (.on ipc-main "load-file" (fn[event path] (io/read-file event path))))
+  (.on ipc-main "load-file" (fn[event path] (io/read-file event path)))
+  (.on app "ready" start))

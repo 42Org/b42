@@ -13,13 +13,14 @@
   (let [web-pref (merge web-pref size)]
     (browser/create-browser-window (clj->js web-pref))
     (browser/load-url "http://localhost:3742")
+    (tools/web-inspector #js{:mode "detach"})
     ;; (menu/build-and-append-keys)
     ;; (tools/create-test-tabs web-pref)
 
-    ;; (config/load)
+    (config/load)
     ;;Reload config with shortcut
 
-    ;; (browser/reset-browser-window-on-close)
+    (browser/reset-browser-window-on-close)
     ))
 
 (defn start-default-window

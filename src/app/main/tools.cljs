@@ -3,8 +3,8 @@
             [app.main.browser :as browser]
             [app.main.keyboard :as kb]))
 
-(defn web-inspector []
-  (.openDevTools (.-webContents @browser/Window) #js{:mode "detach"}))
+(defn web-inspector [mode]
+  (.openDevTools (.-webContents @browser/Window) mode))
 
 ;; FIXME: Debug code. Remove later.
 (defn create-test-tabs [pref]
@@ -15,3 +15,4 @@
 
 (defn open-url [_ url]
   (viewport/load-url-in-current url))
+  (js/console.log mode)

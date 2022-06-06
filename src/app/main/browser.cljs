@@ -14,13 +14,16 @@
   (reset! Window (BrowserWindow. (clj->js pref))))
 
 (defn reset-browser-window-on-close []
-  (@Window.on "closed" #(reset! Window nil)))
+  (.on ^js/electron.BrowserWindow @Window "closed" #(reset! Window nil)))
 
 (defn load-url-in-view [view url]
-  (.loadURL view.webContents "http://yahoo.com"))
+  (view.webContents.loadURL url))
 
 (defn load-url [url]
-  (.loadURL @Window url))
+  (.loadURL ^js/electron.BrowserWindow @Window url))
+
+(defn open-web-inspector [mode]
+  (.openDevTools (.-webContents @browser/Window) mode))
 
 (defn create-browser-view
   ([pref url] (create-browser-view pref url 0 0))
